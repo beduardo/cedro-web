@@ -1,31 +1,63 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { MaterialModule } from './material.module';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        MaterialModule,
       ],
       declarations: [
         AppComponent
       ],
     }).compileComponents();
   }));
-  it('should create the app', async(() => {
+  it('aplicação foi criada', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-  it(`should have as title 'cedro'`, async(() => {
+
+  it('deve possuir o título Cedro', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('cedro');
+    expect(app.titulo).toEqual('Avaliação Cedro');
   }));
-  it('should render title in a h1 tag', async(() => {
+
+  it('deve renderizar o titulo em um span na toolbar', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to cedro!');
+    expect(compiled.querySelector('.titulo-aplicacao').textContent).toContain('Avaliação Cedro');
   }));
+
+  it('deve renderizar o menu para página inicial', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    const link = compiled.querySelector('.link-home');
+    expect(link.textContent).toContain('Home');
+    expect(link.getAttribute('routerlink')).toContain('/inicial');
+  }));
+
+  it('deve renderizar o menu para página restaurantes', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    const link = compiled.querySelector('.link-restaurantes');
+    expect(link.textContent).toContain('Restaurantes');
+    expect(link.getAttribute('routerlink')).toContain('/restaurantes');
+  }));
+
+  it('deve renderizar o menu para página pratos', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    const link = compiled.querySelector('.link-pratos');
+    expect(link.textContent).toContain('Pratos');
+    expect(link.getAttribute('routerlink')).toContain('/pratos');
+  }));
+
 });
