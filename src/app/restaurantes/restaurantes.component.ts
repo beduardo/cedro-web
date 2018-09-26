@@ -10,6 +10,7 @@ import { ServicoRestaurantes } from './restaurantes.service';
 export class RestaurantesComponent implements OnInit {
   titulo = "RESTAURANTES";
   restaurantes: Restaurante[];
+  filtro: string;
 
   constructor(private servico: ServicoRestaurantes) {
 
@@ -20,6 +21,10 @@ export class RestaurantesComponent implements OnInit {
   }
 
   buscarRestaurantes() {
-    this.servico.buscarRestaurantes(null).subscribe(resultado => this.restaurantes = resultado);
+    this.servico.buscarRestaurantes(this.filtro).subscribe(resultado => this.restaurantes = resultado);
+  }
+
+  excluirRestaurante(restaurante: Restaurante) {
+    this.servico.excluirRestaurante(restaurante).subscribe(() => this.buscarRestaurantes());
   }
 }

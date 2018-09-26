@@ -1,0 +1,14 @@
+<mat-toolbar color='primary'>
+    <div class="titulo-container">
+        <span class="titulo-secao">
+            {{titulo}}
+        </span>
+    </div>
+</mat-toolbar>
+<div>
+    <form>
+        <input type="text" name="nome" [(ngModel)]="restaurante.nome" />
+    </form>
+    <button class="botao-salvar" (click)="salvarRestaurante()">Salvar</button>
+    <a class="botao-cancelar" routerLink="/restaurantes">Cancelar</a>
+</div>

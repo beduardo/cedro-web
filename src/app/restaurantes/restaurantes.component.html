@@ -5,3 +5,28 @@
         </span>
     </div>
 </mat-toolbar>
+<div>
+    <form>
+        <input type="text" name="filtropesquisa" value="" [(ngModel)]="filtro" />
+        <button class="pesquisar" (click)="buscarRestaurantes()">Pesquisar</button>
+        <a class="novo-restaurante" routerLink="/novorestaurante">Novo Restaurante</a>
+    </form>
+</div>
+<div class="container">
+    <table class="tabela-lista">
+        <tr>
+            <th></th>
+            <th>Restaurante</th>
+        </tr>
+        <tr *ngFor="let r of restaurantes" class="linha-restaurante">
+            <td>
+                <button mat-button color="accent" class="excluir-restaurante" (click)="excluirRestaurante(r)">
+                    <mat-icon>remove</mat-icon>
+                </button>
+                <a mat-button color="primary" class="editar-restaurante" [routerLink]="['/restaurante', r.id]">
+                    <mat-icon>edit</mat-icon>
+                </a> </td>
+            <td class="nome-restaurante">{{r.nome}}</td>
+        </tr>
+    </table>
+</div>

@@ -39,7 +39,7 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     const link = compiled.querySelector('.link-home');
     expect(link.textContent).toContain('Home');
-    expect(link.getAttribute('routerlink')).toContain('/inicial');
+    expect(link.getAttribute('routerlink')).toBe('/inicial');
   }));
 
   it('deve renderizar o menu para página restaurantes', async(() => {
@@ -48,7 +48,7 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     const link = compiled.querySelector('.link-restaurantes');
     expect(link.textContent).toContain('Restaurantes');
-    expect(link.getAttribute('routerlink')).toContain('/restaurantes');
+    expect(link.getAttribute('routerlink')).toBe('/restaurantes');
   }));
 
   it('deve renderizar o menu para página pratos', async(() => {
@@ -57,7 +57,7 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     const link = compiled.querySelector('.link-pratos');
     expect(link.textContent).toContain('Pratos');
-    expect(link.getAttribute('routerlink')).toContain('/pratos');
+    expect(link.getAttribute('routerlink')).toBe('/pratos');
   }));
 
 });

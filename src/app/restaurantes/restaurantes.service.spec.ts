@@ -6,7 +6,6 @@ import {
 import { ServicoRestaurantes } from "./restaurantes.service";
 import { Restaurante } from "./restaurante.model";
 import { environment } from "../../environments/environment";
-import { HttpParams } from "@angular/common/http";
 
 describe("ServicoRestaurantes", () => {
   let injector: TestBed;
@@ -24,6 +23,26 @@ describe("ServicoRestaurantes", () => {
   });
 
   describe("buscarRestaurantes", () => {
+    it("deve retornar um Observable<Restaurante>", () => {
+      const restauranteARetornar: Restaurante = {
+        id: "1",
+        nome: "Restaurante A"
+      };
+
+      servico.buscaRestaurante("001").subscribe(restaurante => {
+        expect(restaurante).toEqual(restauranteARetornar);
+      });
+
+      const req = httpMock.expectOne(
+        `${environment.baseApi}/api/restaurantes/001`
+      );
+      expect(req.request.method).toBe("GET");
+      req.flush(restauranteARetornar);
+      httpMock.verify();
+    });
+  });
+
+  describe("buscarRestaurantes", () => {
     it("deve retornar um Observable<Restaurante[]>", () => {
       const restaurantesARetornar: Restaurante[] = [
         { id: "1", nome: "Restaurante A" },
@@ -37,7 +56,7 @@ describe("ServicoRestaurantes", () => {
         expect(restaurantes).toEqual(restaurantesARetornar);
       });
 
-      const req = httpMock.expectOne(`${environment.baseApi}/restaurantes`);
+      const req = httpMock.expectOne(`${environment.baseApi}/api/restaurantes`);
       expect(req.request.method).toBe("GET");
       req.flush(restaurantesARetornar);
       httpMock.verify();
@@ -51,11 +70,70 @@ describe("ServicoRestaurantes", () => {
         });
 
       const req = httpMock.expectOne(
-        `${environment.baseApi}/restaurantes?filtro=teste+de+parametros`
+        `${environment.baseApi}/api/restaurantes?filtro=teste+de+parametros`
       );
 
       expect(req.request.method).toBe("GET");
       req.flush([]);
+      httpMock.verify();
+    });
+  });
+
+  describe("excluirRestaurante", () => {
+    it("Deve disparar o DELETE na url correta", () => {
+      const restauranteAApagar: Restaurante = { id: "1", nome: "Teste" };
+      servico.excluirRestaurante(restauranteAApagar).subscribe(() => {});
+      const req = httpMock.expectOne(
+        `${environment.baseApi}/api/restaurantes/1`
+      );
+      expect(req.request.method).toBe("DELETE");
+      req.flush({});
+      httpMock.verify();
+    });
+  });
+
+  describe("salvarRestaurante", () => {
+    it("Deve disparar o POST na url correta quando restaurante não possuir id", () => {
+      const restauranteARetornar: Restaurante = {
+        id: "1",
+        nome: "novo-restaurante"
+      };
+
+      const restauranteACriar: Restaurante = {
+        id: null,
+        nome: "novo-restaurante"
+      };
+
+      servico.salvarRestaurante(restauranteACriar).subscribe(rest => {
+        expect(rest).toEqual(restauranteARetornar);
+      });
+
+      const req = httpMock.expectOne(`${environment.baseApi}/api/restaurantes`);
+      expect(req.request.method).toBe("POST");
+      expect(req.request.body).toEqual(restauranteACriar);
+      req.flush(restauranteARetornar);
+      httpMock.verify();
+    });
+
+    it("Deve disparar o PUT na url correta quando restaurante possuir id", () => {
+      const restauranteARetornar: Restaurante = {
+        id: "1",
+        nome: "restaurante-alterado-b"
+      };
+
+      const restauranteAAlterar: Restaurante = {
+        id: "1",
+        nome: "restaurante-alterado"
+      };
+
+      servico.salvarRestaurante(restauranteAAlterar).subscribe(rest => {
+        expect(rest).toEqual(restauranteARetornar);
+      });
+
+      const req = httpMock.expectOne(`${environment.baseApi}/api/restaurantes`);
+      expect(req.request.method).toBe("PUT");
+      expect(req.request.body).toEqual(restauranteAAlterar);
+      req.flush(restauranteARetornar);
       httpMock.verify();
     });
   });
