@@ -5,13 +5,15 @@
         </span>
     </div>
 </mat-toolbar>
-<div>
+<mat-card>
     <form>
-        <input type="text" name="filtropesquisa" value="" [(ngModel)]="filtro" />
-        <button class="pesquisar" (click)="buscarRestaurantes()">Pesquisar</button>
-        <a class="novo-restaurante" routerLink="/novorestaurante">Novo Restaurante</a>
+        <mat-form-field>
+            <input matInput placeholder="Pesquisar" type="text" name="filtropesquisa" value="" [(ngModel)]="filtro" />
+        </mat-form-field>
     </form>
-</div>
+    <button class="pesquisar" (click)="buscarRestaurantes()" mat-button> <mat-icon>search</mat-icon> Pesquisar</button>
+    <a class="novo-restaurante" routerLink="/novorestaurante" mat-button> <mat-icon>add</mat-icon> Novo Restaurante</a>
+</mat-card>
 <div class="container">
     <table class="tabela-lista">
         <tr>

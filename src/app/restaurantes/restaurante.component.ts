@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./restaurante.component.scss']
 })
 export class RestauranteComponent implements OnInit {
-  titulo = "RESTAURANTE";
+  titulo = "CADASTRO DE RESTAURANTE";
   idRestaurante: string = null;
   restaurante = new Restaurante();
 

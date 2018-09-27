@@ -11,7 +11,7 @@ import { RestauranteComponent } from "./restaurante.component";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ActivatedRouteStub } from "../testing/ActivatedRouteStub";
 
-fdescribe("RestauranteComponent", () => {
+describe("RestauranteComponent", () => {
   let servicoRestaurantesStub: Partial<ServicoRestaurantes>;
   let spyRouter;
   beforeEach(async(() => {

@@ -5,10 +5,20 @@
         </span>
     </div>
 </mat-toolbar>
-<div>
-    <form>
-        <input type="text" name="nome" [(ngModel)]="restaurante.nome" />
+<mat-card>
+
+    <mat-card-header>
+        <mat-card-title>Dados</mat-card-title>
+    </mat-card-header>
+    <form class="form-restaurante">
+        <mat-form-field class="input-full-width">
+            <input matInput placeholder="nome" type="text" name="nome" [(ngModel)]="restaurante.nome" />
+        </mat-form-field>
     </form>
-    <button class="botao-salvar" (click)="salvarRestaurante()">Salvar</button>
-    <a class="botao-cancelar" routerLink="/restaurantes">Cancelar</a>
-</div>
+    <a class="botao-cancelar" routerLink="/restaurantes" mat-button>
+        <mat-icon>arrow_back</mat-icon> Cancelar
+    </a>
+    <button class="botao-salvar" (click)="salvarRestaurante()" mat-button>
+        <mat-icon>save</mat-icon> Salvar
+    </button>
+</mat-card>

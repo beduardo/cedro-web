@@ -1,1 +1,36 @@
-<h1>Pratos</h1>
+<mat-toolbar color='primary'>
+    <div class="titulo-container">
+        <span class="titulo-secao">
+            {{titulo}}
+        </span>
+    </div>
+</mat-toolbar>
+
+<mat-card>
+    <a class="novo-prato" routerLink="/novoprato" mat-button>
+        <mat-icon>add</mat-icon> Novo Prato
+    </a>
+</mat-card>
+
+<div class="container">
+    <table class="tabela-lista">
+        <tr>
+            <th></th>
+            <th>Restaurante</th>
+            <th>Prato</th>
+            <th>Preço</th>
+        </tr>
+        <tr *ngFor="let r of pratos" class="linha-prato">
+            <td>
+                <button mat-button color="accent" class="excluir-prato" (click)="excluirPrato(r)">
+                    <mat-icon>remove</mat-icon>
+                </button>
+                <a mat-button color="primary" class="editar-prato" [routerLink]="['/prato', r.id]">
+                    <mat-icon>edit</mat-icon>
+                </a> </td>
+            <td class="nome-restaurante">{{r.restauranteNome}}</td>
+            <td class="nome-prato">{{r.nome}}</td>
+            <td class="preco-prato">{{r.preco}}</td>
+        </tr>
+    </table>
+</div>

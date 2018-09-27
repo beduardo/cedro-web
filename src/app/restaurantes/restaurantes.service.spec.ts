@@ -22,7 +22,7 @@ describe("ServicoRestaurantes", () => {
     httpMock = injector.get(HttpTestingController);
   });
 
-  describe("buscarRestaurantes", () => {
+  describe("buscarRestaurante", () => {
     it("deve retornar um Observable<Restaurante>", () => {
       const restauranteARetornar: Restaurante = {
         id: "1",

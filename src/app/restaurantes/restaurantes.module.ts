@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RestauranteComponent } from './restaurante.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
         HttpClientModule
     ],
     declarations: [
-        RestaurantesComponent
+        RestaurantesComponent,
+        RestauranteComponent
     ],
     providers: [
         ServicoRestaurantes,

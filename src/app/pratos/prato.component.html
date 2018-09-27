@@ -1,0 +1,34 @@
+<mat-toolbar color='primary'>
+    <div class="titulo-container">
+        <span class="titulo-secao">
+            {{titulo}}
+        </span>
+    </div>
+</mat-toolbar>
+<mat-card>
+
+    <mat-card-header>
+        <mat-card-title>Dados</mat-card-title>
+    </mat-card-header>
+    <form class="form-prato">
+        <mat-form-field class="input-full-width">
+            <mat-select placeholder="Restaurante" name="restaurante" [(ngModel)]="prato.restauranteId">
+                <mat-option *ngFor="let r of restaurantes" [value]="r.id">
+                    {{r.nome}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="input-full-width">
+            <input matInput placeholder="Nome" type="text" name="nome" [(ngModel)]="prato.nome" />
+        </mat-form-field>
+        <mat-form-field class="input-full-width">
+            <input matInput placeholder="Preço" type="text" name="preco" [(ngModel)]="prato.preco" />
+        </mat-form-field>
+    </form>
+    <a class="botao-cancelar" routerLink="/pratos" mat-button>
+        <mat-icon>arrow_back</mat-icon> Cancelar
+    </a>
+    <button class="botao-salvar" (click)="salvarPrato()" mat-button>
+        <mat-icon>save</mat-icon> Salvar
+    </button>
+</mat-card>
