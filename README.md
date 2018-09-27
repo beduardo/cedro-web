@@ -1,27 +1,11 @@
-# Web
+# Avaliação Cedro - FrontEnd
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.7.
+## Observações gerais
+O código a seguir foi implementado para ser integrado à solução BackEnd da avaliação, seguindo o modelo de unificação das funcionalidades em blocos onde módulo, componentes, specs de componentes, serviços e specs de serviços se encontram na mesma pasta. Somente os testes unitários foram implementados para que possam ser avaliadas também a intenção de cada trecho de código. Os elementos principais de cada template também foram testados para que compusessem corretamente a interface do usuário. 
+Os testes de integração (e2e) necessários para a avaliação de performance, gestão de erros e funcionamento junto à infraestrutura não foram implementados por não estarem no escopo inicial da avaliação.
 
-## Development server
+## Tecnologias e padrões utilizados
+O projeto é implementado em Angular 5 para a criação dos componentes da aplicação e Karma/Jasmine para os testes unitários. Para melhorias visuais, o pacote npm `@angular/material` foi incluído ao projeto.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+###### Arquitetura do projeto
+O projeto é dividido em Componentes e Serviços onde um bloco de componentes atende a uma funcionalidade esperada pelo usuário comunicando com os serviços disponíveis para cada funcionalidade. A integração com o backend é feito pelos serviços através de comunicações HTTP padronizadas. 
