@@ -1,3 +1,4 @@
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestBed, async, fakeAsync, tick } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { MaterialModule } from "../material.module";
@@ -19,7 +20,7 @@ describe("RestaurantesComponent", () => {
     };
 
     TestBed.configureTestingModule({
-      imports: [MaterialModule, RouterTestingModule, FormsModule],
+      imports: [MaterialModule, RouterTestingModule, FormsModule, NoopAnimationsModule],
       declarations: [RestaurantesComponent],
       providers: [
         { provide: ServicoRestaurantes, useValue: servicoRestaurantesStub }

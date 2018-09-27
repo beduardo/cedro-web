@@ -1,3 +1,4 @@
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestBed, async, fakeAsync, tick } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { MaterialModule } from "../material.module";
@@ -22,7 +23,7 @@ describe("RestauranteComponent", () => {
     };
 
     TestBed.configureTestingModule({
-      imports: [MaterialModule, RouterTestingModule, FormsModule],
+      imports: [MaterialModule, RouterTestingModule, FormsModule, NoopAnimationsModule],
       declarations: [RestauranteComponent],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
@@ -53,7 +54,7 @@ describe("RestauranteComponent", () => {
   it("deve possuir o título RESTAURANTE", async(() => {
     const fixture = TestBed.createComponent(RestauranteComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.titulo).toEqual("RESTAURANTE");
+    expect(app.titulo).toEqual("CADASTRO DE RESTAURANTE");
   }));
 
   it("deve renderizar o titulo em um span", async(() => {
