@@ -15,12 +15,13 @@ export class PratoComponent implements OnInit {
   idPrato: string = null;
   prato = new Prato();
   restaurantes: Restaurante[] = [];
+  mensagemErro: string = null;
 
   constructor(
     private router: Router,
     private rota: ActivatedRoute,
     private servico: ServicoPratos,
-    private servicoRestaurantes: ServicoRestaurantes,
+    private servicoRestaurantes: ServicoRestaurantes
   ) {}
 
   ngOnInit() {
@@ -31,12 +32,21 @@ export class PratoComponent implements OnInit {
         .subscribe(prato => (this.prato = prato));
     }
 
-    this.servicoRestaurantes.buscarRestaurantes(null).subscribe(restaurantes => this.restaurantes = restaurantes);
+    this.servicoRestaurantes
+      .buscarRestaurantes(null)
+      .subscribe(restaurantes => (this.restaurantes = restaurantes));
   }
 
   salvarPrato() {
-    this.servico.salvarPrato(this.prato).subscribe(rest => {
-      this.router.navigateByUrl("/pratos");
-    });
+    this.mensagemErro = null;
+    this.servico.salvarPrato(this.prato).subscribe(
+      rest => {
+        this.router.navigateByUrl("/pratos");
+      },
+      erro => {
+        console.log(erro);
+        this.mensagemErro = erro;
+      }
+    );
   }
 }

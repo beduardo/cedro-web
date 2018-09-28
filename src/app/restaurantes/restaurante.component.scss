@@ -7,3 +7,12 @@
 .input-full-width {
   width: 100%;
 }
+
+div.mensagemErro {
+  padding: 20px;
+  span {
+    color: red;
+    font-size: 10pt;
+    font-weight: bold;
+  }
+}

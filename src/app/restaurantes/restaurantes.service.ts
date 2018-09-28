@@ -1,8 +1,14 @@
 import { Restaurante } from "./restaurante.model";
-import { Observable } from "rxjs/Observable";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { catchError } from "rxjs/operators";
+import {
+  HttpClient,
+  HttpParams,
+  HttpErrorResponse
+} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
+import { ErrorObservable } from "rxjs/observable/ErrorObservable";
 
 @Injectable()
 export class ServicoRestaurantes {
@@ -35,15 +41,32 @@ export class ServicoRestaurantes {
 
   salvarRestaurante(restaurante: Restaurante): Observable<Restaurante> {
     if (restaurante.id) {
-      return this.http.put<Restaurante>(
-        `${environment.baseApi}/api/restaurantes`,
-        restaurante
-      );
+      return this.http
+        .put<Restaurante>(
+          `${environment.baseApi}/api/restaurantes`,
+          restaurante
+        )
+        .pipe(catchError(this.tratarErro));
     } else {
-      return this.http.post<Restaurante>(
-        `${environment.baseApi}/api/restaurantes`,
-        restaurante
+      return this.http
+        .post<Restaurante>(
+          `${environment.baseApi}/api/restaurantes`,
+          restaurante
+        )
+        .pipe(catchError(this.tratarErro));
+    }
+  }
+
+  private tratarErro(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error("Um erro ocorreu:", error.error.message);
+    } else {
+      console.error(
+        `Backend retornou o códgio ${error.status}, ` + `com o body: ${error.error}`
       );
     }
+    return new ErrorObservable(
+      "Um erro ocorreu. Verifique os campos obrigatórios e tente novamente"
+    );
   }
 }

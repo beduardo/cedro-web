@@ -25,6 +25,9 @@
             <input matInput placeholder="Preço" type="text" name="preco" [(ngModel)]="prato.preco" />
         </mat-form-field>
     </form>
+    <div class="mensagemErro" *ngIf="mensagemErro">
+        <span>{{mensagemErro}}</span>
+    </div>
     <a class="botao-cancelar" routerLink="/pratos" mat-button>
         <mat-icon>arrow_back</mat-icon> Cancelar
     </a>
